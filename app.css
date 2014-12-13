@@ -1,0 +1,63 @@
+/* app css stylesheet */
+
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: #EBEAE2;
+    text-align: center;
+}
+
+#content {
+    display: inline-block;
+    max-width: 400px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+h1 {
+    margin: 0;
+    background-color: #333;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 20px;
+    color: #EBEAE2;
+    padding: 15px;
+    text-align: center;
+}
+
+input {
+    padding: 5%;
+    width: 90%;
+    border: 0;
+    border-bottom: solid 1px #EBEAE2;
+    outline: 0;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    color: #555;
+    background-color: #FFF;
+}
+
+input[type=button] {
+    width: 100%;
+    background-color: #FAFAFA;
+    cursor: pointer;
+}
+
+input:last-of-type {
+    border: 0;
+}
+
+p {
+    margin: 0;
+    background-color: #333;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 12px;
+    color: #EBEAE2;
+    padding: 15px;
+    text-align: center;
+}
