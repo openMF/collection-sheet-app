@@ -1,4 +1,4 @@
-angular.module('app', []).controller('form', function($scope, $http, $timeout, $interval) {
+angular.module('app', []).controller('content', function($scope, $http, $timeout, $interval) {
     $scope.master = {
         input: {},
         sync: {},

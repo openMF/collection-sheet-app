@@ -6,24 +6,29 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
+    <title>Mifos X</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="app.css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400" rel="stylesheet">
 </head>
 <body>
-    <div id="content" ng-controller="form">
-        <h1>Form</h1>
-        <form novalidate>
+    <div id="content" ng-controller="content">
+        <h1>Mifos X</h1>
+        <form id="login" novalidate>
             <input type="text" ng-model="master.input.field1">
             <input type="text" ng-model="master.input.field2">
             <input type="text" ng-model="master.input.field3">
             <input type="text" ng-model="master.input.field4">
-            <input type="button" value="Update" ng-click="click()">
-            <input type="button" value="Reset" ng-click="reset()">
+            <input type="button" value="Update" class="button-bar" ng-click="click()">
+            <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
         </form>
-        <p>Last synced {{master.delay}} seconds ago</p>
+        <form id="sheet" novalidate>
+            <input type="text" placeholder="Username">
+            <input type="text" placeholder="Password">
+            <input type="button" value="Login" ng-click="login()">
+        </form>
+        <p class="sync">Last synced {{master.delay}} seconds ago</p>
     </div>
     
     <script src="bower_components/angular/angular.js"></script>

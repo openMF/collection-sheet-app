@@ -1,63 +1,150 @@
 /* app css stylesheet */
 
-html, body {
+* {
     margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
 }
 
 body {
-    background-color: #EBEAE2;
+    background-color: #222;
     text-align: center;
+}
+
+body:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 
 #content {
     display: inline-block;
+    vertical-align: middle;
     max-width: 400px;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 50px;
+    font-family: "Roboto";
+    font-weight: 400;
+    margin: auto;
+    background-color: #F2F0ED;
+    padding: 30px;
+    border-radius: 2px;
+    box-shadow: rgb(26, 26, 26) 1px 1px,
+    rgb(27, 27, 27) 2px 2px,
+    rgb(27, 27, 27) 3px 3px,
+    rgb(28, 28, 28) 4px 4px,
+    rgb(28, 28, 28) 5px 5px,
+    rgb(29, 29, 29) 6px 6px,
+    rgb(29, 29, 29) 7px 7px,
+    rgb(30, 30, 30) 8px 8px,
+    rgb(30, 30, 30) 9px 9px,
+    rgb(31, 31, 31) 10px 10px,
+    rgb(31, 31, 31) 11px 11px,
+    rgb(32, 32, 32) 12px 12px,
+    rgb(32, 32, 32) 13px 13px,
+    rgb(33, 33, 33) 14px 14px,
+    rgb(34, 34, 34) 15px 15px;
 }
 
 h1 {
-    margin: 0;
-    background-color: #333;
-    font-family: "Montserrat";
-    font-weight: 400;
-    font-size: 20px;
-    color: #EBEAE2;
-    padding: 15px;
+    font-weight: 100;
+    font-size: 50px;
+    color: #222;
     text-align: center;
+    margin-bottom: 40px;
+    text-shadow: rgb(228, 227, 224) 1px 1px,
+    rgb(230, 228, 225) 2px 2px,
+    rgb(231, 230, 227) 3px 3px,
+    rgb(233, 231, 228) 4px 4px,
+    rgb(234, 233, 230) 5px 5px,
+    rgb(236, 234, 231) 6px 6px,
+    rgb(237, 235, 232) 7px 7px,
+    rgb(239, 237, 234) 8px 8px,
+    rgb(240, 238, 235) 9px 9px,
+    rgb(242, 240, 237) 10px 10px;
+}
+
+p.sync {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 100;
+    border-radius: 2px;
+    box-shadow: rgb(31, 31, 31) 1px 1px,
+    rgb(31, 31, 31) 2px 2px,
+    rgb(31, 31, 31) 3px 3px,
+    rgb(32, 32, 32) 4px 4px,
+    rgb(32, 32, 32) 5px 5px,
+    rgb(32, 32, 32) 6px 6px,
+    rgb(33, 33, 33) 7px 7px,
+    rgb(33, 33, 33) 8px 8px,
+    rgb(33, 33, 33) 9px 9px,
+    rgb(34, 34, 34) 10px 10px;
 }
 
 input {
+    font-family: "Roboto";
+    font-weight: 100;
+    margin: 10px 0;
     padding: 5%;
     width: 90%;
-    border: 0;
-    border-bottom: solid 1px #EBEAE2;
-    outline: 0;
-    font-family: "Montserrat";
-    font-weight: 400;
     font-size: 14px;
-    color: #555;
-    background-color: #FFF;
+    color: #666;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    box-shadow: rgb(228, 227, 224) 1px 1px,
+    rgb(230, 228, 225) 2px 2px,
+    rgb(231, 230, 227) 3px 3px,
+    rgb(233, 231, 228) 4px 4px,
+    rgb(234, 233, 230) 5px 5px,
+    rgb(236, 234, 231) 6px 6px,
+    rgb(237, 235, 232) 7px 7px,
+    rgb(239, 237, 234) 8px 8px,
+    rgb(240, 238, 235) 9px 9px,
+    rgb(242, 240, 237) 10px 10px;
 }
 
 input[type=button] {
     width: 100%;
-    background-color: #FAFAFA;
+    float: left;
+    background-color: #C0392B;
+    color: #FFF;
     cursor: pointer;
-}
-
-input:last-of-type {
     border: 0;
+    border-radius: 2px;
+    box-shadow: rgb(220, 218, 215) 1px 1px,
+    rgb(222, 220, 217) 2px 2px,
+    rgb(225, 223, 220) 3px 3px,
+    rgb(227, 225, 222) 4px 4px,
+    rgb(230, 228, 225) 5px 5px,
+    rgb(232, 230, 227) 6px 6px,
+    rgb(234, 232, 229) 7px 7px,
+    rgb(237, 235, 232) 8px 8px,
+    rgb(239, 237, 234) 9px 9px,
+    rgb(242, 240, 237) 10px 10px;
 }
 
-p {
-    margin: 0;
-    background-color: #333;
-    font-family: "Montserrat";
-    font-weight: 400;
-    font-size: 12px;
-    color: #EBEAE2;
-    padding: 15px;
-    text-align: center;
+input[type=button].button-bar {
+    width: 49%;
+}
+
+input[type=button].button-bar.right {
+    float: right;
+    background-color: #444;
+}
+
+input[type=button].button-bar.right:hover {
+    background-color: #222;
+}
+
+input[type=button]:hover {
+    background-color: #96281B;
 }
