@@ -48,16 +48,6 @@ h1 {
     color: #222;
     text-align: center;
     margin-bottom: 40px;
-    text-shadow: rgb(228, 227, 224) 1px 1px,
-    rgb(230, 228, 225) 2px 2px,
-    rgb(231, 230, 227) 3px 3px,
-    rgb(233, 231, 228) 4px 4px,
-    rgb(234, 233, 230) 5px 5px,
-    rgb(236, 234, 231) 6px 6px,
-    rgb(237, 235, 232) 7px 7px,
-    rgb(239, 237, 234) 8px 8px,
-    rgb(240, 238, 235) 9px 9px,
-    rgb(242, 240, 237) 10px 10px;
 }
 
 p.sync {
@@ -82,16 +72,6 @@ input {
     border: 0;
     outline: 0;
     border-radius: 2px;
-    box-shadow: rgb(228, 227, 224) 1px 1px,
-    rgb(230, 228, 225) 2px 2px,
-    rgb(231, 230, 227) 3px 3px,
-    rgb(233, 231, 228) 4px 4px,
-    rgb(234, 233, 230) 5px 5px,
-    rgb(236, 234, 231) 6px 6px,
-    rgb(237, 235, 232) 7px 7px,
-    rgb(239, 237, 234) 8px 8px,
-    rgb(240, 238, 235) 9px 9px,
-    rgb(242, 240, 237) 10px 10px;
 }
 
 input[type=button] {
@@ -102,16 +82,6 @@ input[type=button] {
     cursor: pointer;
     border: 0;
     border-radius: 2px;
-    box-shadow: rgb(220, 218, 215) 1px 1px,
-    rgb(222, 220, 217) 2px 2px,
-    rgb(225, 223, 220) 3px 3px,
-    rgb(227, 225, 222) 4px 4px,
-    rgb(230, 228, 225) 5px 5px,
-    rgb(232, 230, 227) 6px 6px,
-    rgb(234, 232, 229) 7px 7px,
-    rgb(237, 235, 232) 8px 8px,
-    rgb(239, 237, 234) 9px 9px,
-    rgb(242, 240, 237) 10px 10px;
 }
 
 input[type=button].button-bar {
