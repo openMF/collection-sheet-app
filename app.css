@@ -72,6 +72,10 @@ input {
     border: 0;
     outline: 0;
     border-radius: 2px;
+    box-shadow: rgb(218, 216, 213) 1px 1px,
+        rgb(218, 216, 213) 2px 2px,
+        rgb(218, 216, 213) 3px 3px,
+        rgb(218, 216, 213) 4px 4px;
 }
 
 input[type=button] {
