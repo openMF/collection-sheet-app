@@ -1,6 +1,36 @@
 {
-    "field1": "One",
-    "field2": "Two",
-    "field3": "Three",
-    "field4": "Four"
+    "groups": [
+        {
+            "groupId": 1,
+            "groupName": "Collection Sheet 1",
+            "field1": "One1",
+            "field2": "Two",
+            "field3": "Three",
+            "field4": "Four"
+        },
+        {
+            "groupId": 2,
+            "groupName": "Collection Sheet 2",
+            "field1": "One2",
+            "field2": "Two",
+            "field3": "Three",
+            "field4": "Four"
+        },
+        {
+            "groupId": 3,
+            "groupName": "Collection Sheet 3",
+            "field1": "One3",
+            "field2": "Two",
+            "field3": "Three",
+            "field4": "Four"
+        },
+        {
+            "groupId": 4,
+            "groupName": "Collection Sheet 4",
+            "field1": "One4",
+            "field2": "Two",
+            "field3": "Three",
+            "field4": "Four"
+        }
+    ]
 }

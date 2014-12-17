@@ -13,21 +13,35 @@
 </head>
 <body>
     <div id="content" ng-controller="content">
-        <h1>Offline App</h1>
-        <form ng-hide="master.sheet" novalidate>
-            <input type="text" ng-model="master.input.field1">
-            <input type="text" ng-model="master.input.field2">
-            <input type="text" ng-model="master.input.field3">
-            <input type="text" ng-model="master.input.field4">
-            <input type="button" value="Update" class="button-bar" ng-click="click()">
-            <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
-        </form>
         <form ng-hide="master.login" novalidate>
-            <input type="text" placeholder="Username" ng-model="master.auth.username">
-            <input type="password" placeholder="Password" ng-model="master.auth.password">
-            <input type="button" value="Login" class="button-bar" ng-click="login()">
-            <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
+            <div id="main">
+                <h1>Offline App</h1>
+                <input type="text" placeholder="Username" ng-model="master.auth.username">
+                <input type="password" placeholder="Password" ng-model="master.auth.password">
+                <input type="password" placeholder="Tenant ID" ng-model="master.auth.tenant">
+                <input type="button" value="Login" class="button-bar" ng-click="login()">
+                <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
+            </div>
         </form>
+        
+        <form ng-hide="master.sheet" novalidate>
+            <ul id="sidebar">
+                <li ng-repeat="group in master.data track by group.groupId" ng-number="{{group.groupId}}" ng-click="master.current=$index" ng-class="{active: master.current==$index}">{{group.groupName}}</li>
+            </ul>
+            <div id="main">
+                <h1>Offline App</h1>
+                <input type="text" ng-model="master.data[master.current].field1">
+                <input type="text" ng-model="master.data[master.current].field2">
+                <input type="text" ng-model="master.data[master.current].field3">
+                <input type="text" ng-model="master.data[master.current].field4">
+                <input type="button" value="Update" class="button-bar" ng-click="click()">
+                <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
+            </div>
+        </form>
+        
+        <!--<form collection-sheet="{{master.input.groups.groupId}}">
+        </form>-->
+        
         <p class="sync" ng-hide="master.sheet">Last synced {{master.delay}} seconds ago</p>
         <p class="sync" ng-hide="master.connection">Could not connect to server</p>
         <p class="sync" ng-hide="master.authorised">Your login credentials were incorrect</p>

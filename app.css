@@ -33,13 +33,40 @@ body:before {
 #content {
     display: inline-block;
     vertical-align: middle;
-    max-width: 400px;
     font-family: "Roboto";
     font-weight: 100;
     margin: auto;
-    background-color: #F2F0ED;
-    padding: 30px;
+}
+
+form {
+    display: table;
     border-radius: 2px;
+    overflow: hidden;
+}
+
+#sidebar {
+    display: table-cell;
+    vertical-align: top;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 200px;
+    color: #FFF;
+}
+
+#sidebar li {
+    padding: 30px 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#sidebar li.active, #sidebar li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#main {
+    display: table-cell;
+    background-color: #F2F0ED;
+    width: 400px;
+    padding: 30px;
 }
 
 h1 {
@@ -55,7 +82,7 @@ p.sync {
     right: 20px;
     bottom: 20px;
     padding: 12px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
     color: #FFF;
     font-size: 14px;
     border-radius: 2px;
@@ -72,15 +99,13 @@ input {
     border: 0;
     outline: 0;
     border-radius: 2px;
-    box-shadow: rgb(218, 216, 213) 1px 1px,
-        rgb(218, 216, 213) 2px 2px,
-        rgb(218, 216, 213) 3px 3px,
-        rgb(218, 216, 213) 4px 4px;
+    box-shadow: #DAD8D5 1px 1px,
+        #DAD8D5 2px 2px,
+        #DAD8D5 3px 3px,
+        #DAD8D5 4px 4px;
 }
 
 input[type=button] {
-    width: 100%;
-    float: left;
     background-color: #C0392B;
     color: #FFF;
     cursor: pointer;
@@ -90,7 +115,7 @@ input[type=button] {
 }
 
 input[type=button].button-bar {
-    width: 49%;
+    width: 196px;
 }
 
 input[type=button].button-bar.right {

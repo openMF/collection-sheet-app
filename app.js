@@ -1,10 +1,11 @@
 angular.module('app', []).controller('content', function($scope, $http, $timeout, $interval) {
     $scope.master = {
-        input: {},
+        data: [],
         sync: {},
         auth: {},
-        md5: {},
+        sha3: {},
         delay: 0,
+        current: 0,
         key: '1234',
         storage: true,
         connection: true,
@@ -14,17 +15,17 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
     };
     
     $scope.init = function() {
-        var transaction = window.indexedDB.open('form', 1);
+        var transaction = window.indexedDB.open('app', 1);
 
         transaction.onupgradeneeded = function(event) {
             $scope.master.storage = false;
 
             if($scope.master.key) {
                 var database = event.target.result;
-                database.createObjectStore('fields', {keyPath: 'name'});
+                database.createObjectStore('sheets', {keyPath: 'id'});
                 var loginStore = database.createObjectStore('login', {keyPath: 'name'});
 
-                loginStore.add({name: 'credentials', username: $scope.master.md5.username, password: $scope.master.md5.password});
+                loginStore.add({name: 'credentials', username: $scope.master.sha3.username, password: $scope.master.sha3.password});
                 loginStore.add({name: 'key', value: $scope.master.key});
                 
                 $scope.populate();
@@ -33,7 +34,7 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                 $timeout(function() {
                     $scope.master.connection = false;
                 });
-                window.indexedDB.deleteDatabase('form');
+                window.indexedDB.deleteDatabase('app');
             }
         };
 
@@ -44,7 +45,7 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
 
                 var request = loginStore.get('credentials');
                 request.onsuccess = function(event) {
-                    if((request.result.username == $scope.master.md5.username) && (request.result.password == $scope.master.md5.password)) {
+                    if((request.result.username == $scope.master.sha3.username) && (request.result.password == $scope.master.sha3.password)) {
                         $scope.populate();
                     }
                     else {
@@ -62,47 +63,48 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
             method: 'GET',
             url: 'receive.json',
             headers: {
-                'Authorization': 'Basic ' + $scope.master.key
+                'Authorization': 'Basic ' + $scope.master.key,
+                'X-Mifos-Platform-TenantId': $scope.master.auth.tenant
             }
         };
         
         $http(httpRequest).success(function(data, status, headers, config) {
-            var transaction = window.indexedDB.open('form', 1);
+            var transaction = window.indexedDB.open('app', 1);
             
             transaction.onsuccess = function(event) {
                 var database = event.target.result;
-                var objectStore = database.transaction(['fields'], 'readwrite').objectStore('fields');
+                var objectStore = database.transaction(['sheets'], 'readwrite').objectStore('sheets');
                 
                 if($scope.master.storage) {
                     objectStore.openCursor().onsuccess = function(event) {
                         var cursor = event.target.result;
 
                         if(cursor) {
-                            $scope.master.input[cursor.key] = cursor.value.value;
+                            $scope.master.data.push(angular.fromJson(cursor.value.value));
                             cursor.continue();
                         }
                         else {
-                            $scope.update();
                             $scope.master.login = true;
                             $scope.master.authorised = true;
                             $scope.master.connection = true;
                             $scope.master.sheet = false;
+                            
+                            $scope.update();
                             $scope.$apply();
                         }
                     };
                 }
-                else {                    
-                    for(var index in data) {
-                        (function() {
-                            var key = index;
-                            objectStore.add({name: key, value: data[key], synced: true});
-                            $timeout(function() {
-                                $scope.master.input[key] = data[key];
-                            });
-                        })();
+                else {   
+                    $scope.master.data = data.groups;
+
+                    for(var group in $scope.master.data) {
+                        objectStore.add({id: $scope.master.data[group].groupId, value: angular.toJson($scope.master.data[group]), synced: true});
                     };
+
                     $scope.master.login = true;
                     $scope.master.sheet = false;
+
+                    $scope.$apply();
                     $scope.update();
                 }
             }
@@ -110,44 +112,40 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
     };
     
     $scope.click = function() {
-        var transaction = window.indexedDB.open('form', 1);
+        var transaction = window.indexedDB.open('app', 1);
         
         transaction.onsuccess = function(event) {
             var database = event.target.result;
-            var objectStore = database.transaction(['fields'], 'readwrite').objectStore('fields');
+            var objectStore = database.transaction(['sheets'], 'readwrite').objectStore('sheets');
+            var request = objectStore.get($scope.master.data[$scope.master.current].groupId);
             
-            for(var index in $scope.master.input) {
-                (function() {
-                    var key = index;
-                    var request = objectStore.get(key);
-                    request.onsuccess = function(event) {
-                        var result = request.result;
-                        if(result.value != $scope.master.input[key]) {
-                            result.value = $scope.master.input[key];
-                            result.synced = false;
-                        }
-                        objectStore.put(result);
-                    };
-                })();
-            }
+            request.onsuccess = function(event) {
+                var result = request.result;
+                if(!angular.equals(angular.fromJson(result.value), $scope.master.data[$scope.master.current])) {
+                    result.value = $scope.master.data[$scope.master.current];
+                    result.synced = false;
+                }
+                objectStore.put(result);
+            };
         };
     };
     
     $scope.reset = function() {
-        window.indexedDB.deleteDatabase('form');
+        window.indexedDB.deleteDatabase('app');
         location.reload();
     };  
     
     $scope.update = function() {
         $interval(function() {
-            var transaction = window.indexedDB.open('form', 1);
+            var transaction = window.indexedDB.open('app', 1);
 
             transaction.onsuccess = function(event) {
                 var database = event.target.result;
-                var objectStore = database.transaction(['fields'], 'readwrite').objectStore('fields');
+                var objectStore = database.transaction(['sheets'], 'readwrite').objectStore('sheets');
 
                 objectStore.openCursor().onsuccess = function(event) {
                     var cursor = event.target.result;
+                    
                     if(cursor) {
                         if(!cursor.value.synced) {
                             $scope.master.sync[cursor.key] = cursor.value.value;
@@ -156,13 +154,15 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                         }
                         cursor.continue();
                     }
+                    
                     else {
                         if(!angular.equals({}, $scope.master.sync)) {
                             /*var httpRequest = {
                                 method: 'POST',
                                 url: 'send',
                                 headers: {
-                                    'Authorization': 'Basic ' + $scope.master.key
+                                    'Authorization': 'Basic ' + $scope.master.key,
+                                    'X-Mifos-Platform-TenantId': $scope.master.auth.tenant
                                 },
                                 data: $scope.master.sync
                             };
@@ -183,10 +183,19 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
     };
 
     $scope.login = function() {
-        $scope.master.md5.username = CryptoJS.SHA3($scope.master.auth.username).toString();
-        $scope.master.md5.password = CryptoJS.SHA3($scope.master.auth.password).toString();
+        $scope.master.sha3.username = CryptoJS.SHA3($scope.master.auth.username).toString();
+        $scope.master.sha3.password = CryptoJS.SHA3($scope.master.auth.password).toString();
         
-        /*$http.post(authentication, {username: $scope.master.auth.username, password: $scope.master.auth.password}).success(function(data, status, headers, config) {
+       /* var httpRequest = {
+            method: 'POST',
+            url: 'authenticate',
+            headers: {
+                'X-Mifos-Platform-TenantId': $scope.master.auth.tenant
+            },
+            data: {username: $scope.master.auth.username, password: $scope.master.auth.password}
+        };
+        
+        $http(httpRequest).success(function(data, status, headers, config) {
             $scope.master.key = data.base64EncodedAuthenticationKey;*/
             $scope.init();
         /*}).error(function(data, status, headers, config) {
