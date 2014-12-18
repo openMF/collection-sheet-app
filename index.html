@@ -55,10 +55,10 @@
 
                         <tr ng-repeat="loan in client.loans">
                             <td><input disabled="disabled"></td>
-                            <td><input ng-change="change(ngModel)" ng-model="loan.principalDue"></td>
-                            <td><input ng-change="change(ngModel)" ng-model="loan.principalPaid"></td>
-                            <td><input ng-change="change(ngModel)" ng-model="loan.interestDue"></td>
-                            <td><input ng-change="change(ngModel)" ng-model="loan.interestPaid"></td>
+                            <td><input ng-model="loan.principalDue"></td>
+                            <td><input ng-model="loan.principalPaid"></td>
+                            <td><input ng-model="loan.interestDue"></td>
+                            <td><input ng-model="loan.interestPaid"></td>
                             <td><input value="{{total(loan)}}" disabled="disabled"></td>
                             <td><input disabled="disabled"></td>
                         </tr>
