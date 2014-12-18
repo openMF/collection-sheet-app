@@ -14,13 +14,13 @@
 <body>
     <div id="content" ng-controller="content">
         <form ng-hide="master.login" novalidate>
-            <div id="main">
+            <div class="main" id="login">
                 <h1>Offline App</h1>
-                <input type="text" placeholder="Username" ng-model="master.auth.username">
-                <input type="password" placeholder="Password" ng-model="master.auth.password">
-                <input type="password" placeholder="Tenant ID" ng-model="master.auth.tenant">
-                <input type="button" value="Login" class="button-bar" ng-click="login()">
-                <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
+                <input type="text" placeholder="Username" class="block" ng-model="master.auth.username">
+                <input type="password" placeholder="Password" class="block" ng-model="master.auth.password">
+                <input type="password" placeholder="Tenant ID" class="block" ng-model="master.auth.tenant">
+                <input type="button" value="Login" class="button-bar block" ng-click="login()">
+                <input type="button" value="Reset" class="button-bar right block" ng-click="reset()">
             </div>
         </form>
         
@@ -28,14 +28,44 @@
             <ul id="sidebar">
                 <li ng-repeat="group in master.data track by group.groupId" ng-number="{{group.groupId}}" ng-click="master.current=$index" ng-class="{active: master.current==$index}">{{group.groupName}}</li>
             </ul>
-            <div id="main">
+            <div class="main">
                 <h1>Offline App</h1>
-                <input type="text" ng-model="master.data[master.current].field1">
-                <input type="text" ng-model="master.data[master.current].field2">
-                <input type="text" ng-model="master.data[master.current].field3">
-                <input type="text" ng-model="master.data[master.current].field4">
-                <input type="button" value="Update" class="button-bar" ng-click="click()">
-                <input type="button" value="Reset" class="button-bar right" ng-click="reset()">
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th><input type="text" value="Client Name" disabled="disabled"></th>
+                            <th><input type="text" value="Principal Due ($)" disabled="disabled"></th>
+                            <th><input type="text" value="Principal Paid ($)" disabled="disabled"></th>
+                            <th><input type="text" value="Interest Due ($)" disabled="disabled"></th>
+                            <th><input type="text" value="Interest Paid ($)" disabled="disabled"></th>
+                            <th><input type="text" value="Total Due ($)" disabled="disabled"></th>
+                            <th><input type="text" value="Attendance" disabled="disabled"></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="client in master.data[master.current].clients">
+                        <tr>
+                            <td><input type="text" test ng-model="client.clientName"></td>
+                            <td><input disabled="disabled"></td>
+                            <td><input disabled="disabled"></td>
+                            <td><input disabled="disabled"></td>
+                            <td><input disabled="disabled"></td>
+                            <td><input disabled="disabled"></td>
+                            <td><input type="text" ng-model="client.attendanceType.value"></td>
+                        </tr>
+
+                        <tr ng-repeat="loan in client.loans">
+                            <td><input disabled="disabled"></td>
+                            <td><input ng-change="change(ngModel)" ng-model="loan.principalDue"></td>
+                            <td><input ng-change="change(ngModel)" ng-model="loan.principalPaid"></td>
+                            <td><input ng-change="change(ngModel)" ng-model="loan.interestDue"></td>
+                            <td><input ng-change="change(ngModel)" ng-model="loan.interestPaid"></td>
+                            <td><input value="{{total(loan)}}" disabled="disabled"></td>
+                            <td><input disabled="disabled"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="button" value="Update" class="button-bar block" ng-click="click()">
+                <input type="button" value="Reset" class="button-bar right block" ng-click="reset()">
             </div>
         </form>
         

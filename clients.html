@@ -1,0 +1,20 @@
+<div client ng-repeat="client in master.data[master.current].clients">
+    <tr>
+        <td><input type="text" ng-model="$parent.client.clientName"></td>
+        <td><input disabled="disabled"></td>
+        <td><input disabled="disabled"></td>
+        <td><input disabled="disabled"></td>
+        <td><input disabled="disabled"></td>
+        <td><input disabled="disabled"></td>
+        <td><input type="text" ng-model="client.attendanceType.value"></td>
+    </tr>
+</div>
+<tr ng-repeat="loan in master.data[master.current].clients[0].loans">
+    <td><input disabled="disabled"></td>
+    <td><input type="text" ng-model="loan.principalDue"></td>
+    <td><input type="text" ng-model="loan.principalPaid"></td>
+    <td><input type="text" ng-model="loan.interestDue"></td>
+    <td><input type="text" ng-model="loan.interestPaid"></td>
+    <td><input type="text" value="{{total(loan)}}" disabled="disabled"></td>
+    <td><input disabled="disabled"></td>
+</tr>

@@ -1,36 +1,251 @@
 {
-    "groups": [
+  "dueDate":[
+    2014,
+    5,
+    4
+  ],
+  "loanProducts":[
+    {
+      "id":1,
+      "name":"IGL",
+      "includeInBorrowerCycle":false,
+      "useBorrowerCycle":false,
+      "currency":{
+        "code":"USD",
+        "name":"US Dollar",
+        "decimalPlaces":2,
+        "inMultiplesOf":0,
+        "displaySymbol":"$",
+        "nameCode":"currency.USD",
+        "displayLabel":"US Dollar ($)"
+      },
+      "principalVariationsForBorrowerCycle":[
+
+      ],
+      "interestRateVariationsForBorrowerCycle":[
+
+      ],
+      "numberOfRepaymentVariationsForBorrowerCycle":[
+
+      ]
+    }
+  ],
+  "groups":[
+    {
+      "groupId":1,
+      "groupName":"Group 1",
+      "staffId":1,
+      "staffName":"A, Aliya",
+      "levelId":2,
+      "levelName":"Group",
+      "clients":[
         {
-            "groupId": 1,
-            "groupName": "Collection Sheet 1",
-            "field1": "One1",
-            "field2": "Two",
-            "field3": "Three",
-            "field4": "Four"
-        },
-        {
-            "groupId": 2,
-            "groupName": "Collection Sheet 2",
-            "field1": "One2",
-            "field2": "Two",
-            "field3": "Three",
-            "field4": "Four"
-        },
-        {
-            "groupId": 3,
-            "groupName": "Collection Sheet 3",
-            "field1": "One3",
-            "field2": "Two",
-            "field3": "Three",
-            "field4": "Four"
-        },
-        {
-            "groupId": 4,
-            "groupName": "Collection Sheet 4",
-            "field1": "One4",
-            "field2": "Two",
-            "field3": "Three",
-            "field4": "Four"
+          "clientId":1,
+          "clientName":"Client 1",
+          "loans":[
+            {
+              "loanId":1,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            },
+            {
+              "loanId":2,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            }
+          ],
+          "attendanceType":{
+            "id":1,
+            "code":"attendanceType.present",
+            "value":"Present"
+          }
         }
-    ]
+      ]
+    },
+    {
+      "groupId":2,
+      "groupName":"Group 2",
+      "staffId":1,
+      "staffName":"A, Aliya",
+      "levelId":2,
+      "levelName":"Group",
+      "clients":[
+        {
+          "clientId":1,
+          "clientName":"Client 2",
+          "loans":[
+            {
+              "loanId":3,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            },
+            {
+              "loanId":4,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            }
+          ],
+          "attendanceType":{
+            "id":1,
+            "code":"attendanceType.present",
+            "value":"Present"
+          }
+        }
+      ]
+    },
+    {
+      "groupId":3,
+      "groupName":"Group 3",
+      "staffId":1,
+      "staffName":"A, Aliya",
+      "levelId":2,
+      "levelName":"Group",
+      "clients":[
+        {
+          "clientId":3,
+          "clientName":"Client 3",
+          "loans":[
+            {
+              "loanId":5,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            },
+            {
+              "loanId":6,
+              "accountId":"000000010",
+              "accountStatusId":300,
+              "productShortName":"IGL",
+              "productId":1,
+              "currency":{
+                "code":"USD",
+                "name":"US Dollar",
+                "decimalPlaces":2,
+                "inMultiplesOf":0,
+                "displaySymbol":"$",
+                "nameCode":"currency.USD",
+                "displayLabel":"US Dollar ($)"
+              },
+              "principalDue":1000.500000,
+              "principalPaid":50.500000,
+              "interestDue":200.500000,
+              "interestPaid":5.500000,
+              "totalDue":1100.500000
+            }
+          ],
+          "attendanceType":{
+            "id":1,
+            "code":"attendanceType.present",
+            "value":"Present"
+          }
+        }
+      ]
+    }
+  ],
+  "attendanceTypeOptions":[
+    {
+      "id":1,
+      "code":"attendanceType.present",
+      "value":"Present"
+    },
+    {
+      "id":2,
+      "code":"attendanceType.absent",
+      "value":"Absent"
+    },
+    {
+      "id":3,
+      "code":"attendanceType.approved",
+      "value":"Approved"
+    },
+    {
+      "id":4,
+      "code":"attendanceType.leave",
+      "value":"Leave"
+    },
+    {
+      "id":5,
+      "code":"attendanceType.late",
+      "value":"Late"
+    }
+  ]
 }

@@ -11,7 +11,7 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
         connection: true,
         authorised: true,
         sheet: true,
-        connection: true
+        success: false
     };
     
     $scope.init = function() {
@@ -80,7 +80,10 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                         var cursor = event.target.result;
 
                         if(cursor) {
-                            $scope.master.data.push(angular.fromJson(cursor.value.value));
+                            if(cursor.value.synced == true) {
+                                var group = angular.fromJson(cursor.value.value);
+                                $scope.master.data.push(group);
+                            }
                             cursor.continue();
                         }
                         else {
@@ -99,7 +102,7 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
 
                     for(var group in $scope.master.data) {
                         objectStore.add({id: $scope.master.data[group].groupId, value: angular.toJson($scope.master.data[group]), synced: true});
-                    };
+                    }
 
                     $scope.master.login = true;
                     $scope.master.sheet = false;
@@ -107,6 +110,8 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                     $scope.$apply();
                     $scope.update();
                 }
+                
+                
             }
         });
     };
@@ -121,11 +126,16 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
             
             request.onsuccess = function(event) {
                 var result = request.result;
-                if(!angular.equals(angular.fromJson(result.value), $scope.master.data[$scope.master.current])) {
-                    result.value = $scope.master.data[$scope.master.current];
-                    result.synced = false;
-                }
+                
+                result.value = $scope.master.data[$scope.master.current];
+                result.synced = false;
+                
                 objectStore.put(result);
+                
+                $timeout(function() {
+                    $scope.master.data.splice($scope.master.current, 1);
+                    $scope.master.current = 0;
+                });
             };
         };
     };
@@ -149,13 +159,20 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                     if(cursor) {
                         if(!cursor.value.synced) {
                             $scope.master.sync[cursor.key] = cursor.value.value;
-                            cursor.value.synced = true;
+                            cursor.value.synced = 'delete';
                             objectStore.put(cursor.value);
                         }
+                        
+                        else if(cursor.value.synced == 'delete' && $scope.master.success) {
+                            cursor.delete();
+                        }
+                        
                         cursor.continue();
                     }
                     
                     else {
+                        $scope.master.success = false;
+                        
                         if(!angular.equals({}, $scope.master.sync)) {
                             /*var httpRequest = {
                                 method: 'POST',
@@ -170,12 +187,13 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                             $http(httpRequest).success(function(data, status, headers, config) {*/
                                 $scope.master.sync = {};
                                 $scope.master.delay = 0;
+                                $scope.master.success = true;
                             //});
                         }
                     }
                 };
             };
-        }, 5000);
+        }, 10000);
         
         $interval(function() {
             $scope.master.delay++;
@@ -203,5 +221,21 @@ angular.module('app', []).controller('content', function($scope, $http, $timeout
                 $scope.init();
             });
         });*/
+    }
+    
+    $scope.total = function(loan) {
+        var principalPaid = parseFloat(loan.principalPaid);
+        principalPaid = principalPaid || 0;
+        var principalDue = parseFloat(loan.principalDue);
+        principalDue = principalDue || 0;
+        var interestPaid = parseFloat(loan.interestPaid);
+        interestPaid = interestPaid || 0;
+        var interestDue = parseFloat(loan.interestDue);
+        interestDue = interestDue || 0;
+        var totalDue = ((principalDue - principalPaid) + (interestDue - interestPaid)).toFixed(2);
+        totalDue = totalDue || 0;
+        
+        loan.totalDue = totalDue;
+        return totalDue;
     }
 });

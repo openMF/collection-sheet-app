@@ -36,6 +36,7 @@ body:before {
     font-family: "Roboto";
     font-weight: 100;
     margin: auto;
+    padding: 40px;
 }
 
 form {
@@ -62,11 +63,14 @@ form {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-#main {
+.main {
     display: table-cell;
     background-color: #F2F0ED;
-    width: 400px;
     padding: 30px;
+}
+
+#login {
+    width: 400px;
 }
 
 h1 {
@@ -78,31 +82,59 @@ h1 {
 }
 
 p.sync {
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 20px;
     padding: 12px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     color: #FFF;
     font-size: 14px;
     border-radius: 2px;
 }
 
-input {
-    font-family: "Roboto";
-    font-weight: 100;
-    margin: 10px 0;
-    padding: 5%;
-    width: 90%;
-    font-size: 14px;
-    color: #666;
-    border: 0;
-    outline: 0;
-    border-radius: 2px;
+table {
     box-shadow: #DAD8D5 1px 1px,
         #DAD8D5 2px 2px,
         #DAD8D5 3px 3px,
         #DAD8D5 4px 4px;
+    margin: 10px 0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+th input {
+    text-align: center;
+}
+
+input {
+    font-family: "Roboto";
+    font-weight: 100;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+    outline: 0;
+    margin: 0;
+    border: 0;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 1px solid #DAD8D5;
+    border-right: 1px solid #DAD8D5;
+    width: 100px;
+}
+
+input:disabled {
+    background-color: #EAE8E5;
+}
+
+input.block {
+    margin: 10px 0;
+    box-shadow: #DAD8D5 1px 1px,
+        #DAD8D5 2px 2px,
+        #DAD8D5 3px 3px,
+        #DAD8D5 4px 4px;
+    border: 0;
+    width: 90%;
+    border-radius: 2px;
 }
 
 input[type=button] {
@@ -115,12 +147,14 @@ input[type=button] {
 }
 
 input[type=button].button-bar {
+    float: left;
     width: 196px;
 }
 
 input[type=button].button-bar.right {
-    float: right;
+    float: left;
     background-color: #444;
+    margin-left: 8px;
 }
 
 input[type=button].button-bar.right:hover {
